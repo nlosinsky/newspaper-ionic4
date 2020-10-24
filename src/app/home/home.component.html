@@ -1,0 +1,44 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Home</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row>
+			<ion-col size="12">
+				<ion-item>
+					<ion-label>Country</ion-label>
+					<ion-select interface="popover" [(ngModel)]="selectedCountry" (ngModelChange)="onSelectCountry()">
+						<ion-select-option *ngFor="let country of countries" [value]="country">{{country.name}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+			<ion-col size="12">
+				<ion-item>
+					<ion-label>Category</ion-label>
+					<ion-select interface="popover" [(ngModel)]="selectedCategory" (ngModelChange)="onSelectCategory()">
+						<ion-select-option *ngFor="let category of categories" [value]="category">{{category.name}}</ion-select-option>
+					</ion-select>
+				</ion-item>
+			</ion-col>
+			<ng-container *ngIf="!showPageLoader">
+				<ion-col *ngFor="let article of articles" size="12" size-sm="6" size-md="4" size-lg="4">
+					<ion-card>
+						<ion-img [src]="article.urlToImage"></ion-img>
+						<ion-card-header>
+							<ion-card-title>
+								{{article.title}}
+							</ion-card-title>
+						</ion-card-header>
+					</ion-card>
+				</ion-col>
+			</ng-container>
+		</ion-row>
+		<ion-spinner *ngIf="showPageLoader" name="lines" class="page-loader"></ion-spinner>
+	</ion-grid>
+</ion-content>

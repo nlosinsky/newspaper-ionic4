@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { finalize } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 import { CATEGORIES } from '../mock-data/mock-categories';
 import { COUNTRIES } from '../mock-data/mock-countries';
 import { Article, Category, Country } from '../models';
 import { NewsApiService } from '../providers/news-api.service';
+import { WidgetUtilService } from '../providers/widget-util.service';
 
 
 @Component({
@@ -23,7 +25,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private apiService: NewsApiService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private widgetUtilService: WidgetUtilService
   ) {
   }
 
@@ -41,10 +44,21 @@ export class HomeComponent implements OnInit {
     this.loadHeadlines();
   }
 
+  doRefresh(event) {
+    this.loadHeadlines();
+    setTimeout(() => {
+      event.target.complete()
+    }, 2000);
+  }
+
   private loadHeadlines() {
     this.showPageLoader = true;
     this.apiService.getTopHeadlines(this.selectedCountry.code, this.selectedCategory.id)
       .pipe(
+        catchError(error => {
+          this.widgetUtilService.presentToast(error.statusText);
+          return EMPTY;
+        }),
         finalize(() => {
           this.showPageLoader = false;
           this.cd.markForCheck();

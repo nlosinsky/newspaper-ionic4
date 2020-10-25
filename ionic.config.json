@@ -1,5 +1,7 @@
 {
   "name": "newspaper-ionic4",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

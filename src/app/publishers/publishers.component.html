@@ -1,0 +1,28 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-menu-button></ion-menu-button>
+		</ion-buttons>
+		<ion-title>Publishers</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+		<ion-row *ngIf="!showPageLoader" class="ion-justify-content-center">
+			<ion-col *ngFor="let publisher of publishers" size="12" size-xs="6" size-sm="4" size-md="3" size-lg="2">
+				<ion-card>
+						<ion-card-header>
+							<ion-card-title class="ion-text-center">
+								{{publisher.name}}
+							</ion-card-title>
+						</ion-card-header>
+					<ion-card-content>
+						<ion-img [src]="publisher.logo"></ion-img>
+					</ion-card-content>
+				</ion-card>
+			</ion-col>
+		</ion-row>
+		<ion-spinner *ngIf="showPageLoader" name="lines" class="page-loader"></ion-spinner>
+	</ion-grid>
+</ion-content>

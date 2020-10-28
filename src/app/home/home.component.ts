@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EMPTY } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { CATEGORIES } from '../mock-data/mock-categories';
@@ -6,6 +7,7 @@ import { COUNTRIES } from '../mock-data/mock-countries';
 import { Article, Category, Country } from '../models';
 import { NewsApiService } from '../providers/news-api.service';
 import { WidgetUtilService } from '../providers/widget-util.service';
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -26,7 +28,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private apiService: NewsApiService,
     private cd: ChangeDetectorRef,
-    private widgetUtilService: WidgetUtilService
+    private widgetUtilService: WidgetUtilService,
+    private router: Router,
+    private storage: Storage
   ) {
   }
 
@@ -49,6 +53,11 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       event.target.complete()
     }, 2000);
+  }
+
+  async onNewsDetailPage(article: Article) {
+    await this.storage.set('currentArticle', article);
+    this.router.navigate(['/news-detail']);
   }
 
   private loadHeadlines() {

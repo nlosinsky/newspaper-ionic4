@@ -54,6 +54,10 @@ export class HomeComponent implements OnInit {
     }, 2000);
   }
 
+  onSaveArticle() {
+
+  }
+
   async onNewsDetailPage(article: Article) {
     await this.storage.set('currentArticle', article);
     this.router.navigate(['/news-detail']);

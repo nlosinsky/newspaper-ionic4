@@ -41,6 +41,12 @@
 						<ion-card-content>
 							<ion-row>
 								<ion-col>
+									<ion-button expand="block" color="secondary" fill="outline" (click)="onSaveArticle(article)">
+										<ion-icon name="bookmark"></ion-icon>
+										Save
+									</ion-button>
+								</ion-col>
+								<ion-col>
 									<ion-button expand="block" color="secondary" (click)="onNewsDetailPage(article)">
 										<ion-icon name="eye-outline"></ion-icon>
 										View

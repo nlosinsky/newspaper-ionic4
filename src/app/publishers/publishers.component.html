@@ -9,9 +9,9 @@
 
 <ion-content>
 	<ion-grid>
-		<ion-row *ngIf="!showPageLoader" class="ion-justify-content-center">
+		<ion-row *ngIf="!showPageLoader">
 			<ion-col *ngFor="let publisher of publishers" size="12" size-xs="6" size-sm="4" size-md="3" size-lg="2">
-				<ion-card>
+				<ion-card (click)="onPublisherDetailPage(publisher)">
 						<ion-card-header>
 							<ion-card-title class="ion-text-center">
 								{{publisher.name}}

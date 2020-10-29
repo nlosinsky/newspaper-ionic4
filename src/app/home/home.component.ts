@@ -5,6 +5,7 @@ import { catchError, finalize } from 'rxjs/operators';
 import { CATEGORIES } from '../mock-data/mock-categories';
 import { COUNTRIES } from '../mock-data/mock-countries';
 import { Article, Category, Country } from '../models';
+import { HelperService } from '../providers/helper.service';
 import { NewsApiService } from '../providers/news-api.service';
 import { WidgetUtilService } from '../providers/widget-util.service';
 import { Storage } from '@ionic/storage';
@@ -29,7 +30,8 @@ export class HomeComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private widgetUtilService: WidgetUtilService,
     private router: Router,
-    private storage: Storage
+    private storage: Storage,
+    private helperService: HelperService
   ) {
   }
 
@@ -54,8 +56,8 @@ export class HomeComponent implements OnInit {
     }, 2000);
   }
 
-  onSaveArticle() {
-
+  onSaveArticle(article: Article) {
+    this.helperService.onSaveArticle(article);
   }
 
   async onNewsDetailPage(article: Article) {

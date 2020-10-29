@@ -21,6 +21,11 @@ export class AppComponent implements OnInit {
       title: 'Publishers',
       url: '/publishers',
       icon: 'book'
+    },
+    {
+      title: 'Saved',
+      url: '/saved-article',
+      icon: 'bookmark'
     }
   ];
 

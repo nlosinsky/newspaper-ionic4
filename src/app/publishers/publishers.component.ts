@@ -24,6 +24,6 @@ export class PublishersComponent implements OnInit {
 
   async onPublisherDetailPage(publisher: Publisher) {
     await this.storage.set('currentPublisher', publisher);
-    this.router.navigate(['/publisher-detail']);
+    this.router.navigate(['/publisher-news']);
   }
 }

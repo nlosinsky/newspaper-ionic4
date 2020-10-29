@@ -4,15 +4,16 @@ import { Storage } from '@ionic/storage';
 import { EMPTY } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
 import { Article, Publisher } from '../models';
+import { HelperService } from '../providers/helper.service';
 import { NewsApiService } from '../providers/news-api.service';
 import { WidgetUtilService } from '../providers/widget-util.service';
 
 @Component({
-  selector: 'app-publisher-detail',
-  templateUrl: './publisher-detail.page.html',
+  selector: 'app-publisher-news',
+  templateUrl: './publisher-news.page.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PublisherDetailPage implements OnInit {
+export class PublisherNewsPage implements OnInit {
   publisher: Publisher;
   showPageLoader = false;
   articles: Article[] = [];
@@ -22,7 +23,8 @@ export class PublisherDetailPage implements OnInit {
     private apiService: NewsApiService,
     private widgetUtilService: WidgetUtilService,
     private cd: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
+    private helperService: HelperService
   ) {
   }
 
@@ -53,6 +55,10 @@ export class PublisherDetailPage implements OnInit {
       .subscribe((resp: Article[]) => {
         this.articles = resp;
       });
+  }
+
+  onSaveArticle(article: Article) {
+    this.helperService.onSaveArticle(article);
   }
 
   async onNewsDetailPage(article: Article) {

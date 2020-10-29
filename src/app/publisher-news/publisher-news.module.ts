@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-import { PublisherDetailRoutingModule } from './publisher-detail-routing.module';
-import { PublisherDetailPage } from './publisher-detail.page';
+import { PublisherNewsRoutingModule } from './publisher-news-routing.module';
+import { PublisherNewsPage } from './publisher-news.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PublisherDetailRoutingModule
+    PublisherNewsRoutingModule
   ],
   declarations: [
-    PublisherDetailPage
+    PublisherNewsPage
   ]
 })
-export class PublisherDetailModule {}
+export class PublisherNewsModule {}
